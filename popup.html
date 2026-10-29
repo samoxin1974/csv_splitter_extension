@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CSV Splitter</title>
+    <style>
+        :root {
+            --dark-blue: #2c3e50;
+            --light-blue: #3498db;
+            --coral-red: #e74c3c;
+            --white: #ecf0f1;
+            --light-gray: #bdc3c7;
+            --dark-gray: #7f8c8d;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            width: 320px;
+            background-color: var(--dark-blue);
+            color: var(--white);
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--light-blue);
+            margin: 0 0 10px 0;
+            font-weight: 600;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: var(--light-gray);
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            border: 2px solid var(--dark-gray);
+            border-radius: 5px;
+            background-color: var(--dark-blue);
+            color: var(--white);
+            font-size: 16px;
+        }
+
+        input[type="file"] {
+            color: var(--dark-gray);
+        }
+
+        /* Style the file input button */
+        input[type="file"]::file-selector-button {
+            background-color: var(--light-blue);
+            color: var(--white);
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        input[type="file"]::file-selector-button:hover {
+            background-color: #2980b9; /* A darker blue */
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: -5px;
+        }
+
+        #splitButton {
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: var(--coral-red);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        #splitButton:hover {
+            background-color: #c0392b; /* A darker red */
+        }
+
+        #splitButton:active {
+            transform: scale(0.98);
+        }
+
+        #status {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 14px;
+            min-height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>CSV Splitter</h2>
+
+        <div class="input-group">
+            <label for="csvFileInput">Select CSV File</label>
+            <input type="file" id="csvFileInput" accept=".csv">
+        </div>
+
+        <div class="input-group">
+            <label for="linesPerFile">Lines per split file</label>
+            <input type="number" id="linesPerFile" value="500" min="1">
+        </div>
+
+        <div class="checkbox-group">
+            <input type="checkbox" id="hasHeaderCheckbox" checked>
+            <label for="hasHeaderCheckbox">First row is a header</label>
+        </div>
+
+        <button id="splitButton">Split and Download ZIP</button>
+
+        <div id="status"></div>
+    </div>
+
+    <!-- Libraries -->
+    <script src="papaparse.min.js"></script>
+    <script src="jszip.min.js"></script>
+    <!-- Extension Logic -->
+    <script src="popup.js"></script>
+</body>
+</html>
